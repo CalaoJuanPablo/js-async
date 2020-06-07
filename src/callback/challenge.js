@@ -1,24 +1,7 @@
-let XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
+let fetchData = require('../utils/fetchData').fetchData
 
 let BASE_URL = 'https://rickandmortyapi.com/api/'
 
-function fetchData(url, callback) {
-	let xhttp = new XMLHttpRequest()
-	xhttp.open('GET', url, true)
-
-	xhttp.onreadystatechange = function(event) {
-		if (xhttp.readyState === 4) {
-			if (xhttp.status === 200) {
-				callback(null, JSON.parse(xhttp.responseText))
-			} else {
-				const error = new Error(xhttp.status + xhttp.statusText)
-				return callback(error, null)
-			}
-		}
-	}
-
-	xhttp.send()
-}
 
 fetchData(BASE_URL + 'character/', function getCharacter(error1, data1) {
 	if (error1) return console.error(error1)
